@@ -9,7 +9,7 @@ public class Faculty {
   private int programIndex;
 
   public Faculty(String facultyName, int amountOfPrograms, int amountOfTeachers) {
-    if(facultyName.isBlank()){
+    if (facultyName.isBlank()) {
       this.facultyName = "Temp faculty name";
     } else {
       this.facultyName = facultyName;
@@ -19,8 +19,8 @@ public class Faculty {
       this.teachers = new Teacher[amountOfTeachers];
     }
     if ((amountOfPrograms > 0)) {
-        assert programs != null;
-        this.programIndex = programs.length;
+      assert programs != null;
+      this.programIndex = programs.length;
     }
   }
 
@@ -44,11 +44,11 @@ public class Faculty {
               return "Student borttagen.";
             }
           }
-        }else {
-            return "Student fanns ej i programmet.";
-          }
+        } else {
+          return "Student fanns ej i programmet.";
         }
       }
+    }
     if (temp == programs.length) {
       return "Inget program med det namnet.";
     }
@@ -57,16 +57,16 @@ public class Faculty {
 
   public String checkIfTeacherExists(String teacherName) {
     if (this.teachers != null) {
-        for (Teacher teacher : teachers) {
-            if (teacher != null) {
-                if (Objects.equals(teacher.toString(), teacherName)) {
-                    return "Läraren tillhör fakulteten.";
-                }
-            }
+      for (Teacher teacher : teachers) {
+        if (teacher != null) {
+          if (Objects.equals(teacher.toString(), teacherName)) {
+            return "Läraren tillhör fakulteten.";
+          }
         }
-        return "Läraren tillhör inte fakulteten.";
+      }
+      return "Läraren tillhör inte fakulteten.";
     }
-  return "-1";
+    return "-1";
   }
 
   public String addCoursesToProgram(Course[] courses, String programName) {
@@ -99,7 +99,7 @@ public class Faculty {
           if (program.getStudents()[i] == null) {
             program.getStudents()[i] = student;
             return "Student tillagd i programmet.";
-          }else {
+          } else {
             return "Programmet är fullt.";
           }
         }
@@ -118,14 +118,14 @@ public class Faculty {
       if (programs[i] == null) {
         programs[i] = new Program(programName, amountOfCourses, amountOfStudents);
         return "Program tillagt.";
-      }else {
+      } else {
         temp++;
       }
     }
     if (programs.length == temp) {
       return "Max antal program tillagda.";
     }
-      return programName;
+    return programName;
   }
 
   public String[] getProgramNames() {
@@ -142,7 +142,7 @@ public class Faculty {
         for (Student student : program.getStudents()) {
           if (Objects.equals(student.getName(), studentName)) {
             return "Studenten är registrerad.";
-          }else {
+          } else {
             return "Studenten är inte registrerad på programmet.";
           }
         }
@@ -163,22 +163,22 @@ public class Faculty {
 
   public String findStudentByID(String uniID, String programName) {
     int temp = 0;
-      for (Program program : programs) {
-          if (program != null) {
-              for (Student student : program.getStudents()) {
-                  if (student != null) {
-                      if (student.getUni_ID().equals(uniID)) {
-                          return student.getName();
-                      }
-                  } else {
-                      temp++;
-                  }
-              }
-              if (temp == program.getStudents().length) {
-                  return "Inget namn finns associerat med detta student-ID.";
-              }
+    for (Program program : programs) {
+      if (program != null) {
+        for (Student student : program.getStudents()) {
+          if (student != null) {
+            if (student.getUni_ID().equals(uniID)) {
+              return student.getName();
+            }
+          } else {
+            temp++;
           }
+        }
+        if (temp == program.getStudents().length) {
+          return "Inget namn finns associerat med detta student-ID.";
+        }
       }
-      return "Inget namn finns associerat med detta student-ID.";
+    }
+    return "Inget namn finns associerat med detta student-ID.";
   }
 }
